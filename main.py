@@ -52,6 +52,13 @@ async def process_start(message: Message, state: FSMContext):
         await message.answer("Вы можете пользоваться ботом!")
 
 
+@dp.message(Command(commands=['stop']))
+async def process_start(message: Message, state: FSMContext):
+    await db.delete_user(message.from_user.id)
+    await message.answer("Вы отписались! Начать /start")
+    await state.set_data(default_state)
+
+
 @dp.message(StateFilter(InputPassword.input_password))
 async def process_start(message: Message, state: FSMContext):
     if message.text == password:
@@ -75,5 +82,3 @@ async def send_message(message: Message, bot: Bot):
 
 if __name__ == '__main__':
     asyncio.run(dp.run_polling(bot))
-    
-
