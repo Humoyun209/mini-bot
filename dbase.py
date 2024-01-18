@@ -18,4 +18,4 @@ class DataBase:
     async def user_list(self):
         async with aiosqlite.connect('db.sqlite3') as conn:
             users = await conn.execute('SELECT * FROM users')
-            return users.fetchall()
+            return await users.fetchall()

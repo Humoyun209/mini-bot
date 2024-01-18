@@ -73,9 +73,6 @@ async def send_message(message: Message, bot: Bot):
         await bot.send_message(user[0], message.text)
 
 
-
-
-
 if __name__ == '__main__':
     asyncio.run(dp.run_polling(bot))
     
