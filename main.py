@@ -1,5 +1,6 @@
 import logging
 import asyncio
+import random
 from environs import Env
 
 from aiogram.types import Message
@@ -54,10 +55,12 @@ async def process_stop(message: Message):
 @dp.message(StateFilter(InputPassword.input_password))
 async def process_start(message: Message, state: FSMContext):
     if message.text == password:
+        username = message.from_user.username
         await db.insert_user(
             user_id=message.from_user.id,
-            username=message.from_user.username
+            username= username if username else f'Anonym{random.randint(1, 1000000)}'
         )
+       
         await message.answer("Поздравляю, вы успешно ввели пароль!")
         logging.info(f'Пользователь {message.from_user.username} подписался')
         await state.set_state(default_state)

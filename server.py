@@ -1,11 +1,12 @@
+
+import aiohttp
 from aiohttp import web
 from environs import Env
 
-from dbase import DataBase
-
-import aiohttp
 import asyncio
 from dbase import DataBase
+from dbase import DataBase
+
 
 db = DataBase()
 env = Env()
@@ -43,7 +44,6 @@ async def handle(request):
 
 app = web.Application()
 app.router.add_get('/', handle)
-
 
 if __name__ == '__main__':
     web.run_app(app)
