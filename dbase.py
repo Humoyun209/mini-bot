@@ -1,3 +1,4 @@
+import asyncio
 import aiosqlite
 
 
@@ -23,3 +24,10 @@ class DataBase:
             if await self.check_user(user_id):
                 await conn.execute('DELETE FROM users WHERE id = ?', (user_id, ))
                 await conn.commit()
+                
+
+# async def main():
+#     db = DataBase()
+#     await db.insert_user(2106991711, 'humoyun209')
+
+# asyncio.run(main())
