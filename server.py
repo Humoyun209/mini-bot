@@ -1,4 +1,4 @@
-
+from urllib.parse import unquote
 import aiohttp
 from aiohttp import web
 from environs import Env
@@ -37,7 +37,7 @@ async def handle(request):
     queries = request.url.query
     db = DataBase()
     users = await db.user_list()
-    message = queries.get('text')
+    message = unquote(queries.get('text'), encoding='utf-8')
     if message:
         await main(message, users)
     return web.Response(text="Сервер работает!")
