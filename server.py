@@ -37,9 +37,10 @@ async def handle(request):
     queries = request.url.query
     db = DataBase()
     users = await db.user_list()
-    message = unquote(queries.get('text'), encoding='utf-8')
-    if message:
-        await main(message, users)
+    if len(queries):
+        message = unquote(queries.get('text'), encoding='utf-8')
+        if message:
+            await main(message, users)
     return web.Response(text="Сервер работает!")
 
 app = web.Application()
